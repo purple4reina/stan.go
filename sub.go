@@ -15,6 +15,7 @@
 package stan
 
 import (
+	"context"
 	"errors"
 	"sync"
 	"time"
@@ -34,6 +35,7 @@ const (
 type Msg struct {
 	pb.MsgProto // MsgProto: Seq, Subject, Reply[opt], Data, Timestamp, CRC32[opt]
 	Sub         Subscription
+	Context     context.Context
 }
 
 // Subscriptions and Options

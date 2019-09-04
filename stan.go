@@ -15,6 +15,7 @@
 package stan
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"sync"
@@ -800,7 +801,7 @@ func (sc *conn) removeAck(guid string) *ack {
 
 // Process an msg from the NATS Streaming cluster
 func (sc *conn) processMsg(raw *nats.Msg) {
-	msg := &Msg{}
+	msg := &Msg{Context: context.Background()}
 	err := msg.Unmarshal(raw.Data)
 	if err != nil {
 		panic(fmt.Errorf("error processing unmarshal for msg: %v", err))
